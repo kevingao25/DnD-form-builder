@@ -1,7 +1,35 @@
-.navbar {
-	padding: 20px;
+* {
+	border: 0;
+	margin: 0;
 }
 
-.fieldElem {
-	padding: 2rem;
+html,
+body {
+	/* overflow: hidden; */
+	height: 100%;
+}
+
+/* Form elements */
+.border {
+	padding: 8px;
+}
+
+.border:hover {
+	border: 1px dashed rgba(143, 142, 199, 0.5) !important;
+}
+
+.cursor {
+	cursor: grab;
+}
+
+.form-control {
+	cursor: inherit;
+}
+
+.form-label {
+	cursor: inherit;
+}
+
+.build-space {
+	padding: 100px 400px;
 }
