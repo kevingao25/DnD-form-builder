@@ -1,13 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function TextareaElement() {
+function RatingElement() {
 	return (
 		<div className="field-element">
-			<FontAwesomeIcon icon="font" fixedWidth />
-			<span className="field-text">Text</span>
+			<FontAwesomeIcon icon="star" fixedWidth />
+			<span className="field-text">Rating</span>
 		</div>
 	);
 }
 
-export default TextareaElement;
+export default RatingElement;
