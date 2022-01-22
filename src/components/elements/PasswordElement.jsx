@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDrop } from "react-dnd";
 
 function PasswordElement() {
 	return (

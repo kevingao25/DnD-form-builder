@@ -30,10 +30,10 @@ body {
 	cursor: inherit;
 } */
 
-.build-space {
+.build-zone {
 	margin-top: 68px;
-	width: 50rem;
-	height: 30rem;
+	width: 50vw;
+	height: 50vh;
 	padding-top: 100px;
 	text-align: center;
 	overflow: scroll;
@@ -62,4 +62,8 @@ body {
 .field-text {
 	margin-left: 1rem;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.green-background {
+	background-color: green;
 }
