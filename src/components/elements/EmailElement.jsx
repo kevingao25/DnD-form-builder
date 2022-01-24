@@ -20,12 +20,14 @@ function EmailElement() {
 			<span className="field-text">Email</span>
 		</div>
 
-		// <Form className="border mb-3 cursor">
-		// 	<Form.Group controlId="formBasicEmail">
-		// 		<Form.Label>Email address</Form.Label>
-		// 		<Form.Control type="email" placeholder="Enter email" />
-		// 	</Form.Group>
-		// </Form>
+		/* <form>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email Address</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+				</div>
+			</form>
+		*/
+		
 	);
 }
 

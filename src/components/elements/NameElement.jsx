@@ -13,8 +13,22 @@ function NameElement() {
 				<Form.Label className="label">Last Name</Form.Label>
 				<Form.Control type="text" name="lastName" />
 			</Form.Group>
+			
 		</Form>
 	);
+
+	/*
+	<form>
+		<div class="form-row">
+    		<div class="col">
+      			<input type="text" class="form-control" placeholder="First name"/>
+    		</div>
+    		<div class="col">
+      			<input type="text" class="form-control" placeholder="Last name"/>
+    		</div>
+  		</div>
+	</form>
+	*/
 }
 
 export default NameElement;

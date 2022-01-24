@@ -10,4 +10,11 @@ function WebsiteElement() {
 	);
 }
 
+/*
+<div className="field-element">
+<label for="url">Website Link/URL</label>
+<input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" size="30"/>
+</div>
+*/
+
 export default WebsiteElement;
