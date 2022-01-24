@@ -32,15 +32,16 @@ body {
 
 .build-zone {
 	margin-top: 68px;
+	padding-top: 20px;
 	width: 50vw;
-	height: 50vh;
-	padding-top: 100px;
+	height: 75vh;
 	text-align: center;
 	overflow: scroll;
 }
 
 .lead {
 	font-size: 24px;
+	padding-top: 100px;
 }
 
 .fill-height {

@@ -26,6 +26,32 @@ import {
 } from "./elements";
 
 function Builder() {
+	const Map = {
+		nameElement: NameElement,
+		passwordElement: PasswordElement,
+		emailElement: EmailElement,
+		textareaElement: TextareaElement,
+		addressElement: AddressElement,
+		phoneElement: PhoneElement,
+		dateElement: DateElement,
+		timeElement: TimeElement,
+		websiteElement: WebsiteElement,
+		fileElement: FileElement,
+		checkboxElement: CheckboxElement,
+		radioElement: RadioElement,
+		dropdownElement: DropdownElement,
+		ratingElement: RatingElement,
+		selectElement: SelectElement,
+		submitElement: SubmitElement,
+	};
+
+	// Pass down to BuildZone component for fields rendering
+	const renderElements = (field, index) => {
+		// Dynamic component name
+		const FieldElement = Map[field];
+		return <FieldElement onBuild={true} key={index} />;
+	};
+
 	return (
 		<div className="main vh-100">
 			<AppHeader />
@@ -91,7 +117,7 @@ function Builder() {
 
 						{/* Build zone */}
 						<div className="col-8 fill-height">
-							<BuildZone />
+							<BuildZone renderElements={renderElements} />
 						</div>
 					</div>
 				</div>
