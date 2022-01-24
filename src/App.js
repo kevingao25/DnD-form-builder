@@ -3,6 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Builder from "./components/Builder";
 import "./App.css";
 
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
 // Font awesome icons
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {

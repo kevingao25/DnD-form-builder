@@ -10,4 +10,11 @@ function TextareaElement() {
 	);
 }
 
+/*
+<div class="form-group">
+  <label for="comment">Text:</label>
+  <textarea class="form-control" rows="5" id="comment"></textarea>
+</div>
+*/
+
 export default TextareaElement;

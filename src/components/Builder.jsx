@@ -59,7 +59,7 @@ function Builder() {
 				<div className="container-fluid">
 					<div className="row">
 						{/* Field elements */}
-						<div className="col-4 bg-light pt-3">
+						<div className="col-4 pt-3">
 							<div className="container">
 								<span className="fs-4">Elements</span>
 								<hr />

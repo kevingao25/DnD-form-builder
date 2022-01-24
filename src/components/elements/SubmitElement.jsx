@@ -10,4 +10,8 @@ function SubmitElement() {
 	);
 }
 
+/*
+<button type="button" class="btn btn-outline-dark">Submit</button>
+*/
+
 export default SubmitElement;

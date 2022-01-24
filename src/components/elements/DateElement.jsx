@@ -6,6 +6,7 @@ function DateElement() {
 		<div className="field-element">
 			<FontAwesomeIcon icon="calendar-alt" fixedWidth />
 			<span className="field-text">Date</span>
+
 		</div>
 	);
 }

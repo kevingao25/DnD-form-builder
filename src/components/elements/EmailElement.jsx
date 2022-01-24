@@ -1,15 +1,13 @@
 import React from "react";
-import Form from "react-bootstrap/form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDrag } from "react-dnd";
 
 function EmailElement({ onBuild }) {
 	// useDrag hook
-	const [{ isDragging, opacity }, dragRef] = useDrag({
+	const [{ opacity }, dragRef] = useDrag({
 		type: "field",
 		item: { name: "emailElement" },
 		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
 			opacity: monitor.isDragging() ? 0.4 : 1, // Styling purpose
 		}),
 	});
@@ -24,12 +22,18 @@ function EmailElement({ onBuild }) {
 		);
 	} else {
 		return (
-			<Form className="border mb-3 cursor" ref={dragRef} style={{ opacity }}>
-				<Form.Group controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
-					<Form.Control type="email" placeholder="Enter email" />
-				</Form.Group>
-			</Form>
+			<form>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email Address</label>
+					<input
+						type="email"
+						class="form-control"
+						id="exampleInputEmail1"
+						aria-describedby="emailHelp"
+						placeholder="Enter email"
+					/>
+				</div>
+			</form>
 		);
 	}
 }
