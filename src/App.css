@@ -35,7 +35,6 @@ body {
 	padding-top: 20px;
 	width: 50vw;
 	height: 75vh;
-	text-align: center;
 	overflow: scroll;
 }
 
@@ -65,6 +64,6 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.green-background {
-	background-color: green;
+.bg-light {
+	background-color: #f8f9fabb !important;
 }

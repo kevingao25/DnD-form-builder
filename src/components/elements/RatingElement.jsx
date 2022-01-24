@@ -1,16 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDrag } from "react-dnd";
+import { MDBContainer, MDBRating } from "mdbreact";
 import "./rating.css";
 
+function RatingElement({ onBuild, type }) {
+	const [basic] = useState([
+		{
+			tooltip: "Very Bad",
+		},
+		{
+			tooltip: "Poor",
+		},
+		{
+			tooltip: "Ok",
+			choosed: true,
+		},
+		{
+			tooltip: "Good",
+		},
+		{
+			tooltip: "Excellent",
+		},
+	]);
 
-function RatingElement() {
-	return (
-		<div className="field-element">
-			<FontAwesomeIcon icon="star" fixedWidth />
-			<span className="field-text">Rating</span>
+	// useDrag hook
+	const [{ opacity }, dragRef] = useDrag({
+		type,
+		item: { name: "ratingElement" },
+		collect: (monitor) => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
+		}),
+	});
 
-		</div>
-	);
+	// Conditionally rendering the element
+	if (onBuild !== true) {
+		// Title rendering
+		return (
+			<div ref={dragRef} style={{ opacity }} className="field-element">
+				<FontAwesomeIcon icon="star" fixedWidth />
+				<span className="field-text">Rating</span>
+			</div>
+		);
+	} else {
+		// Build rendering
+		return (
+			<div ref={dragRef} style={{ opacity }} class="form-group">
+				{/* <MDBContainer>
+					<MDBRating iconRegular />
+				</MDBContainer> */}
+				Rating element
+			</div>
+		);
+	}
 }
 
 export default RatingElement;

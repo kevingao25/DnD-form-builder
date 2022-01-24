@@ -12,5 +12,4 @@ export { default as CheckboxElement } from "./CheckboxElement";
 export { default as RadioElement } from "./RadioElement";
 export { default as DropdownElement } from "./DropdownElement";
 export { default as RatingElement } from "./RatingElement";
-export { default as SelectElement } from "./SelectElement";
 export { default as SubmitElement } from "./SubmitElement";

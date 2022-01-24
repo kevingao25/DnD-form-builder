@@ -1,17 +1,36 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDrag } from "react-dnd";
 
-function SubmitElement() {
-	return (
-		<div className="field-element">
-			<FontAwesomeIcon icon="check" fixedWidth />
-			<span className="field-text">Submit</span>
-		</div>
-	);
+function SubmitElement({ onBuild, type }) {
+	// useDrag hook
+	const [{ opacity }, dragRef] = useDrag({
+		type,
+		item: { name: "submitElement" },
+		collect: (monitor) => ({
+			opacity: monitor.isDragging() ? 0.4 : 1,
+		}),
+	});
+
+	// Conditionally rendering the element
+	if (onBuild !== true) {
+		// Title rendering
+		return (
+			<div ref={dragRef} style={{ opacity }} className="field-element">
+				<FontAwesomeIcon icon="check" fixedWidth />
+				<span className="field-text">Submit</span>
+			</div>
+		);
+	} else {
+		// Build rendering
+		return (
+			<div ref={dragRef} style={{ opacity }} class="form">
+				<button type="button" class="btn btn-outline-dark">
+					Submit
+				</button>
+			</div>
+		);
+	}
 }
-
-/*
-<button type="button" class="btn btn-outline-dark">Submit</button>
-*/
 
 export default SubmitElement;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import AppHeader from "./AppHeader";
 import BuildZone from "./BuildZone";
 import { DndProvider } from "react-dnd";
@@ -21,7 +20,6 @@ import {
 	RadioElement,
 	DropdownElement,
 	RatingElement,
-	SelectElement,
 	SubmitElement,
 } from "./elements";
 
@@ -41,7 +39,6 @@ function Builder() {
 		radioElement: RadioElement,
 		dropdownElement: DropdownElement,
 		ratingElement: RatingElement,
-		selectElement: SelectElement,
 		submitElement: SubmitElement,
 	};
 
@@ -49,7 +46,7 @@ function Builder() {
 	const renderElements = (field, index) => {
 		// Dynamic component name
 		const FieldElement = Map[field];
-		return <FieldElement onBuild={true} key={index} />;
+		return <FieldElement onBuild={true} key={index} type="sortable" />;
 	};
 
 	return (
@@ -66,50 +63,51 @@ function Builder() {
 
 								<div className="row no-gutters">
 									<div className="col-xl-6">
-										<EmailElement />
+										<NameElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<PasswordElement />
+										<EmailElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<TextareaElement />
+										<PasswordElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<PhoneElement />
+										<TextareaElement type="field" />
+									</div>
+									<div className="col-xl-6">
+										<PhoneElement type="field" />
 									</div>
 
 									<div className="col-xl-6">
-										<DateElement />
+										<DateElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<TimeElement />
+										<TimeElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<WebsiteElement />
+										<WebsiteElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<FileElement />
+										<FileElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<CheckboxElement />
+										<CheckboxElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<RadioElement />
+										<RadioElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<DropdownElement />
+										<DropdownElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<RatingElement />
+										<RatingElement type="field" />
+									</div>
+
+									<div className="col-xl-6">
+										<SubmitElement type="field" />
 									</div>
 									<div className="col-xl-6">
-										<SelectElement />
-									</div>
-									<div className="col-xl-6">
-										<SubmitElement />
-									</div>
-									<div className="col-xl-6">
-										<AddressElement />
+										<AddressElement type="field" />
 									</div>
 								</div>
 							</div>

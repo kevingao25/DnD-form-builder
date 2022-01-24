@@ -28,11 +28,11 @@ function BuildZone({ renderElements }) {
 
 	return (
 		<div ref={dropRef} className={`build-zone mx-auto border rounded ${backgroundColor}`}>
-			<div className="container">
+			<div className="container" style={{ padding: "20px 50px" }}>
 				{
 					// Conditionally render the build zone
 					emptyField ? (
-						<p className="text-muted lead">Add Fields Here</p>
+						<p className="text-muted lead text-center">Add Fields Here</p>
 					) : (
 						fields.map((field, index) => renderElements(field, index))
 					)
