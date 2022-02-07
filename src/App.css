@@ -34,7 +34,7 @@ body {
 	margin-top: 68px;
 	padding-top: 20px;
 	width: 50vw;
-	height: 75vh;
+	height: 70vh;
 	overflow: scroll;
 }
 
@@ -66,4 +66,12 @@ body {
 
 .bg-light {
 	background-color: #f8f9fabb !important;
+}
+
+.form-group {
+	cursor: move;
+}
+
+label {
+	cursor: inherit;
 }

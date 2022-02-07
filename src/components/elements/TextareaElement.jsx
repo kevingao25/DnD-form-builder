@@ -26,7 +26,7 @@ function TextareaElement({ onBuild, type }) {
 		return (
 			<div ref={dragRef} style={{ opacity }} className="form-group">
 				<label for="comment">Textarea:</label>
-				<textarea class="form-control" rows="5" id="comment"></textarea>
+				<textarea className="form-control" rows="5" id="comment"></textarea>
 			</div>
 		);
 	}

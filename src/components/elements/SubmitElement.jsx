@@ -24,8 +24,8 @@ function SubmitElement({ onBuild, type }) {
 	} else {
 		// Build rendering
 		return (
-			<div ref={dragRef} style={{ opacity }} class="form">
-				<button type="button" class="btn btn-outline-dark">
+			<div ref={dragRef} style={{ opacity }} className="form">
+				<button type="button" className="btn btn-outline-dark">
 					Submit
 				</button>
 			</div>

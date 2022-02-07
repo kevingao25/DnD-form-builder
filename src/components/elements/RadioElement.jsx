@@ -24,16 +24,16 @@ function RadioElement({ onBuild, type }) {
 	} else {
 		// Build rendering
 		return (
-			<div ref={dragRef} style={{ opacity }} class="form-group">
-				<div class="form-check">
+			<div ref={dragRef} style={{ opacity }} className="form-group">
+				<div className="form-check">
 					<input
-						class="form-check-input"
+						className="form-check-input"
 						type="radio"
 						name="exampleRadios"
 						id="exampleRadios1"
 						value="option1"
 					/>
-					<label class="form-check-label" for="exampleRadios1">
+					<label className="form-check-label" for="exampleRadios1">
 						<input placeholder="radio buttons" />
 					</label>
 				</div>

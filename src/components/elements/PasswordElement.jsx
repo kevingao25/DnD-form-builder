@@ -30,7 +30,7 @@ function PasswordElement({ onBuild, type }) {
 					<label for="exampleInputPassword1">Password</label>
 					<input
 						type="password"
-						class="form-control"
+						className="form-control"
 						id="exampleInputPassword1"
 						placeholder="Password"
 					/>

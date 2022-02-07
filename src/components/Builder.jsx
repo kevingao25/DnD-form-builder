@@ -24,6 +24,7 @@ import {
 } from "./elements";
 
 function Builder() {
+	// name <-> components
 	const Map = {
 		nameElement: NameElement,
 		passwordElement: PasswordElement,
@@ -42,11 +43,19 @@ function Builder() {
 		submitElement: SubmitElement,
 	};
 
-	// Pass down to BuildZone component for fields rendering
-	const renderElements = (field, index) => {
+	// Pass down to BuildZone component for fields UI rendering
+	const renderElements = (field, index, moveField) => {
 		// Dynamic component name
-		const FieldElement = Map[field];
-		return <FieldElement onBuild={true} key={index} type="sortable" />;
+		const FieldElement = Map[field.name];
+		return (
+			<FieldElement
+				onBuild={true}
+				key={field.id}
+				index={index}
+				type="sortable"
+				moveField={moveField}
+			/>
+		);
 	};
 
 	return (
@@ -57,8 +66,8 @@ function Builder() {
 					<div className="row">
 						{/* Field elements */}
 						<div className="col-4 pt-3">
-							<div className="container">
-								<span className="fs-4">Elements</span>
+							<div className="container px-4">
+								<span className="fs-5">Elements</span>
 								<hr />
 
 								<div className="row no-gutters">
@@ -77,7 +86,6 @@ function Builder() {
 									<div className="col-xl-6">
 										<PhoneElement type="field" />
 									</div>
-
 									<div className="col-xl-6">
 										<DateElement type="field" />
 									</div>
@@ -102,7 +110,6 @@ function Builder() {
 									<div className="col-xl-6">
 										<RatingElement type="field" />
 									</div>
-
 									<div className="col-xl-6">
 										<SubmitElement type="field" />
 									</div>
