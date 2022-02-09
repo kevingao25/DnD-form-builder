@@ -34,7 +34,11 @@ body {
 	margin-top: 68px;
 	padding-top: 20px;
 	width: 50vw;
-	height: 70vh;
+	min-height: 70vh;
+	/* overflow: scroll; */
+}
+
+.scroll {
 	overflow: scroll;
 }
 
@@ -44,7 +48,7 @@ body {
 }
 
 .fill-height {
-	height: calc(100vh - 88px) !important;
+	min-height: calc(100vh - 88px) !important;
 }
 
 .field-element {
@@ -74,4 +78,37 @@ body {
 
 label {
 	cursor: inherit;
+}
+
+/* .delete {
+	visibility: hidden;
+} */
+
+/* .form-group:focus + button {
+	visibility: visible;
+} */
+
+.show-action-group {
+	position: relative;
+}
+
+.hide-action-group {
+	position: relative;
+	display: none;
+}
+
+.delete {
+	position: absolute;
+	right: -140px;
+	top: -88px;
+	height: 31px;
+	text-align: center;
+}
+
+.edit {
+	position: absolute;
+	right: -140px;
+	top: -52px;
+	height: 31px;
+	text-align: center;
 }

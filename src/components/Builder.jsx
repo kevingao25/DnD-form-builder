@@ -24,40 +24,6 @@ import {
 } from "./elements";
 
 function Builder() {
-	// name <-> components
-	const Map = {
-		nameElement: NameElement,
-		passwordElement: PasswordElement,
-		emailElement: EmailElement,
-		textareaElement: TextareaElement,
-		addressElement: AddressElement,
-		phoneElement: PhoneElement,
-		dateElement: DateElement,
-		timeElement: TimeElement,
-		websiteElement: WebsiteElement,
-		fileElement: FileElement,
-		checkboxElement: CheckboxElement,
-		radioElement: RadioElement,
-		dropdownElement: DropdownElement,
-		ratingElement: RatingElement,
-		submitElement: SubmitElement,
-	};
-
-	// Pass down to BuildZone component for fields UI rendering
-	const renderElements = (field, index, moveField) => {
-		// Dynamic component name
-		const FieldElement = Map[field.name];
-		return (
-			<FieldElement
-				onBuild={true}
-				key={field.id}
-				index={index}
-				type="sortable"
-				moveField={moveField}
-			/>
-		);
-	};
-
 	return (
 		<div className="main vh-100">
 			<AppHeader />
@@ -65,7 +31,7 @@ function Builder() {
 				<div className="container-fluid">
 					<div className="row">
 						{/* Field elements */}
-						<div className="col-4 pt-3">
+						<div className="col-4 pt-3 shadow-sm">
 							<div className="container px-4">
 								<span className="fs-5">Elements</span>
 								<hr />
@@ -121,8 +87,8 @@ function Builder() {
 						</div>
 
 						{/* Build zone */}
-						<div className="col-8 fill-height">
-							<BuildZone renderElements={renderElements} />
+						<div className="col-8 fill-height scroll shadow-sm">
+							<BuildZone />
 						</div>
 					</div>
 				</div>

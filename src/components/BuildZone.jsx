@@ -3,13 +3,28 @@ import { useDrop } from "react-dnd";
 import uniqid from "uniqid";
 import update from "immutability-helper";
 
-function BuildZone({ renderElements }) {
+// Import field components
+import {
+	NameElement,
+	PasswordElement,
+	EmailElement,
+	TextareaElement,
+	AddressElement,
+	PhoneElement,
+	DateElement,
+	TimeElement,
+	WebsiteElement,
+	FileElement,
+	CheckboxElement,
+	RadioElement,
+	DropdownElement,
+	RatingElement,
+	SubmitElement,
+} from "./elements";
+
+function BuildZone() {
 	// Track the list of fields in the build zone for rendering
 	const [fields, setFields] = useState([]);
-
-	// const handleDrop = (newField) => {
-	// 	setFields((oldFields) => [...oldFields, newField]);
-	// };
 
 	// useDrop hook
 	const [{ isOver }, dropRef] = useDrop({
@@ -28,8 +43,41 @@ function BuildZone({ renderElements }) {
 		}),
 	});
 
-	const backgroundColor = isOver ? "bg-warning" : "bg-light";
-	const emptyField = fields.length === 0 ? true : false;
+	// name <-> components
+	const Map = {
+		nameElement: NameElement,
+		passwordElement: PasswordElement,
+		emailElement: EmailElement,
+		textareaElement: TextareaElement,
+		addressElement: AddressElement,
+		phoneElement: PhoneElement,
+		dateElement: DateElement,
+		timeElement: TimeElement,
+		websiteElement: WebsiteElement,
+		fileElement: FileElement,
+		checkboxElement: CheckboxElement,
+		radioElement: RadioElement,
+		dropdownElement: DropdownElement,
+		ratingElement: RatingElement,
+		submitElement: SubmitElement,
+	};
+
+	// Pass down to BuildZone component for fields UI rendering
+	const renderElements = (field, index, moveField, deleteField) => {
+		// Dynamic component name
+		const FieldElement = Map[field.name];
+		return (
+			<FieldElement
+				onBuild={true}
+				key={field.id}
+				id={field.id}
+				index={index}
+				type="sortable"
+				moveField={moveField}
+				deleteField={deleteField}
+			/>
+		);
+	};
 
 	// Helper function for sortable fields
 	const moveField = useCallback((dragIndex, hoverIndex) => {
@@ -43,8 +91,21 @@ function BuildZone({ renderElements }) {
 		);
 	}, []);
 
+	// Delete function
+	const deleteField = (id) => {
+		const newFields = fields.filter((field) => {
+			return field.id !== id;
+		});
+		setFields(newFields);
+	};
+
+	const backgroundColor = isOver ? "bg-warning" : "bg-light";
+	const emptyField = fields.length === 0 ? true : false;
+
 	return (
-		<div ref={dropRef} className={`build-zone mx-auto border rounded ${backgroundColor}`}>
+		<div
+			ref={dropRef}
+			className={`build-zone mx-auto border rounded ${backgroundColor} shadow-sm`}>
 			<div className="container " style={{ padding: "20px 50px" }}>
 				{
 					// Conditionally render the build zone
@@ -52,7 +113,9 @@ function BuildZone({ renderElements }) {
 						<p className="text-muted lead text-center">Add Fields Here</p>
 					) : (
 						// Render the UI fields
-						fields.map((field, index) => renderElements(field, index, moveField))
+						fields.map((field, index) =>
+							renderElements(field, index, moveField, deleteField)
+						)
 					)
 				}
 			</div>

@@ -1,12 +1,30 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect, Fragment } from "react";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDrag, useDrop } from "react-dnd";
 
-function NameElement({ onBuild, type, moveField, index }) {
-	const ref = useRef(null);
+function NameElement(props) {
+	// Deconstruct props
+	const { onBuild, type, moveField, index, id, deleteField } = props;
 
-	// useDrop hook
+	// --------------------------------------------------------------------
+	// *** Drag implementation of fields in element titles ***
+
+	const [{ titleDragging }, titleDrag] = useDrag({
+		type: type,
+		item: { name: "nameElement", index },
+		collect: (monitor) => ({
+			titleDragging: monitor.isDragging(),
+		}),
+	});
+
+	// --------------------------------------------------------------------
+	// *** Drag and drop implementation of fields in build zone ***
+
+	const [focused, setFocused] = useState(false);
+	const sortableRef = useRef(null);
+
+	// Sortable list
 	const [{ handlerID }, drop] = useDrop({
 		accept: "sortable",
 		collect(monitor) {
@@ -15,7 +33,7 @@ function NameElement({ onBuild, type, moveField, index }) {
 			};
 		},
 		hover(item, monitor) {
-			if (!ref.current) {
+			if (!sortableRef.current) {
 				return;
 			}
 			const dragIndex = item.index;
@@ -27,7 +45,7 @@ function NameElement({ onBuild, type, moveField, index }) {
 			}
 
 			// Determine rectangle on screen
-			const hoverBoundingRect = ref.current?.getBoundingClientRect();
+			const hoverBoundingRect = sortableRef.current?.getBoundingClientRect();
 			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 			const clientOffset = monitor.getClientOffset();
 			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
@@ -41,40 +59,54 @@ function NameElement({ onBuild, type, moveField, index }) {
 				return;
 			}
 
-			// Time to actually perform the action
+			// Time to move the field
 			moveField(dragIndex, hoverIndex);
-			// Note: we're mutating the monitor item here!
-			// Generally it's better to avoid mutations,
-			// but it's good here for the sake of performance
-			// to avoid expensive index searches.
 			item.index = hoverIndex;
 		},
 	});
 
 	// useDrag hook
 	const [{ isDragging }, drag] = useDrag({
-		type,
+		type: type,
 		item: { name: "nameElement", index },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
 	});
 
-	drag(drop(ref));
+	drag(drop(sortableRef));
 
-	// Debug
-	// console.log("index is :", index);
-	// console.log(handlerID);
-	// console.log({ isDragging }, "nameElement");
+	// Hide and display control widget
+	useEffect(() => {
+		// Bind the event listener
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			// Unbind the event listener on clean up
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [sortableRef]);
 
+	function handleClickOutside(event) {
+		if (sortableRef.current && !sortableRef.current.contains(event.target)) {
+			setFocused(false);
+		} else if (sortableRef.current && sortableRef.current.contains(event.target)) {
+			setFocused(true);
+		}
+	}
+
+	// --------------------------------------------------------------------
+	// *** Rendering ***
+
+	// CSS properties
 	let opacity;
+
 	// Conditionally rendering the element
 	if (onBuild !== true) {
 		// Title rendering
-		opacity = isDragging ? 0.4 : 1;
+		opacity = titleDragging ? 0.4 : 1;
 		return (
 			<div
-				ref={ref}
+				ref={titleDrag}
 				style={{ opacity }}
 				className="field-element"
 				data-handler-id={handlerID}>
@@ -86,23 +118,48 @@ function NameElement({ onBuild, type, moveField, index }) {
 		// Build rendering
 		opacity = isDragging ? 0 : 1;
 		return (
-			<div ref={ref} style={{ opacity }} className="form-group" data-handler-id={handlerID}>
-				<div className="form-row">
-					<div className="col">
-						<label htmlFor="firstName">First name</label>
-						<input type="text" className="form-control" placeholder="First name" />
-					</div>
-					<div className="col">
-						<label htmlFor="lastName">Last name</label>
-						<input type="text" className="form-control" placeholder="Last name" />
+			<Fragment>
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className="form-group"
+					data-handler-id={handlerID}
+					id={{ id }}>
+					<div className="form-row">
+						<div className="col">
+							<label htmlFor="firstName">First name</label>
+							<input type="text" className="form-control" placeholder="First name" />
+						</div>
+						<div className="col">
+							<label htmlFor="lastName">Last name</label>
+							<input type="text" className="form-control" placeholder="Last name" />
+						</div>
 					</div>
 				</div>
 
-				{/* <div class="action-circle delete-circle">
-					<span class="glyphicon glyphicon-trash delete-trash"></span>{" "}
-					<span class="delete-text">Remove</span>
-				</div> */}
-			</div>
+				<div className={focused ? "show-action-group" : "hide-action-group"}>
+					<button
+						className="btn btn-danger btn-sm rounded delete"
+						type="button"
+						data-toggle="tooltip"
+						data-placement="top"
+						title=""
+						onMouseDown={() => deleteField(id)}
+						data-original-title="Delete">
+						<i className="fa fa-trash"></i>
+					</button>
+
+					<button
+						className="btn btn-success btn-sm rounded edit"
+						type="button"
+						data-toggle="tooltip"
+						data-placement="top"
+						title=""
+						data-original-title="Edit">
+						<i className="fa fa-cog"></i>
+					</button>
+				</div>
+			</Fragment>
 		);
 	}
 }

@@ -4,7 +4,10 @@ import { useDrag } from "react-dnd";
 import { MDBContainer, MDBRating } from "mdbreact";
 import "./rating.css";
 
-function RatingElement({ onBuild, type }) {
+function RatingElement(props) {
+	// Deconstruct props
+	const { onBuild, type, moveField, index, id, deleteField } = props;
+
 	const [basic] = useState([
 		{
 			tooltip: "Very Bad",
@@ -45,7 +48,7 @@ function RatingElement({ onBuild, type }) {
 	} else {
 		// Build rendering
 		return (
-			<div ref={dragRef} style={{ opacity }} class="form-group">
+			<div ref={dragRef} style={{ opacity }} className="form-group">
 				{/* <MDBContainer>
 					<MDBRating iconRegular />
 				</MDBContainer> */}
