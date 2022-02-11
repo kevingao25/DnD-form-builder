@@ -116,7 +116,7 @@ function AddressElement(props) {
 				<div
 					ref={sortableRef}
 					style={{ opacity }}
-					className="form-group"
+					className={`form-group ${focused ? "border-left" : ""}`}
 					data-handler-id={handlerID}
 					id={{ id }}>
 					<label htmlFor="inputAddress">Address</label>

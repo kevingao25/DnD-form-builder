@@ -113,7 +113,11 @@ function WebsiteElement(props) {
 		opacity = isDragging ? 0 : 1;
 		return (
 			<Fragment>
-				<div ref={sortableRef} style={{ opacity }} className="form-group">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}
+					data-handler-id={handlerID}>
 					<label htmlFor="url">Website Link/URL: </label>
 					<input
 						type="url"
@@ -122,6 +126,7 @@ function WebsiteElement(props) {
 						placeholder="https://example.com"
 						pattern="https://.*"
 						size="30"
+						className="form-control-sm"
 					/>
 				</div>
 

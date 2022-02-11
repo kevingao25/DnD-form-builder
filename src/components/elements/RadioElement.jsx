@@ -113,7 +113,11 @@ function RadioElement(props) {
 		opacity = isDragging ? 0 : 1;
 		return (
 			<Fragment>
-				<div ref={sortableRef} style={{ opacity }} className="form-group">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}
+					data-handler-id={handlerID}>
 					<div className="form-check">
 						<input
 							className="form-check-input"
@@ -123,7 +127,7 @@ function RadioElement(props) {
 							value="option1"
 						/>
 						<label className="form-check-label" htmlFor="exampleRadios1">
-							<input placeholder="radio buttons" />
+							<input placeholder="radio buttons" className="form-control-sm" />
 						</label>
 					</div>
 				</div>

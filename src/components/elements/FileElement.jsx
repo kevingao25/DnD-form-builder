@@ -113,7 +113,11 @@ function FileElement(props) {
 		opacity = isDragging ? 0 : 1;
 		return (
 			<Fragment>
-				<div ref={sortableRef} style={{ opacity }} className="form-group">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}
+					data-handler-id={handlerID}>
 					<label htmlFor="exampleFormControlFile1">Example file input</label>
 					<input type="file" className="form-control-file" id="exampleFormControlFile1" />
 				</div>

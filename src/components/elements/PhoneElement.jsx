@@ -114,7 +114,11 @@ function PhoneElement(props) {
 		return (
 			<Fragment>
 				<form>
-					<div ref={sortableRef} style={{ opacity }} className="form-group">
+					<div
+						ref={sortableRef}
+						style={{ opacity }}
+						className={`form-group ${focused ? "border-left" : ""}`}
+						data-handler-id={handlerID}>
 						<label htmlFor="phone">Phone Number:</label>
 						<input
 							type="tel"
@@ -122,6 +126,7 @@ function PhoneElement(props) {
 							name="phone"
 							placeholder="123-456-7890"
 							pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+							className="form-control-sm"
 						/>
 					</div>
 				</form>

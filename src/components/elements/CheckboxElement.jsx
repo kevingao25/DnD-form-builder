@@ -119,7 +119,10 @@ function CheckboxElement(props) {
 		return (
 			<Fragment>
 				{/* Edit UI field here */}
-				<div ref={sortableRef} style={{ opacity }} className="form-group">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}>
 					<div className="form-check">
 						<input
 							className="form-check-input"
@@ -128,7 +131,7 @@ function CheckboxElement(props) {
 							id="defaultCheck1"
 						/>
 						<label className="form-check-label" htmlFor="defaultCheck1">
-							<input placeholder="Checkbox" />
+							<input placeholder="Checkbox" className="form-control-sm" />
 						</label>
 					</div>
 				</div>

@@ -114,7 +114,11 @@ function PasswordElement(props) {
 		return (
 			<Fragment>
 				<form>
-					<div ref={sortableRef} style={{ opacity }} className="form-group">
+					<div
+						ref={sortableRef}
+						style={{ opacity }}
+						className={`form-group ${focused ? "border-left" : ""}`}
+						data-handler-id={handlerID}>
 						<label htmlFor="exampleInputPassword1">Password</label>
 						<input
 							type="password"

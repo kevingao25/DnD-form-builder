@@ -112,7 +112,11 @@ function TextareaElement(props) {
 		opacity = isDragging ? 0 : 1;
 		return (
 			<Fragment>
-				<div ref={sortableRef} style={{ opacity }} className="form-group">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}
+					data-handler-id={handlerID}>
 					<label htmlFor="comment">Textarea:</label>
 					<textarea className="form-control" rows="5" id="comment"></textarea>
 				</div>

@@ -113,7 +113,11 @@ function SubmitElement(props) {
 		opacity = isDragging ? 0 : 1;
 		return (
 			<Fragment>
-				<div ref={sortableRef} style={{ opacity }} className="form">
+				<div
+					ref={sortableRef}
+					style={{ opacity }}
+					className={`form-group ${focused ? "border-left" : ""}`}
+					data-handler-id={handlerID}>
 					<button type="button" className="btn btn-outline-dark">
 						Submit
 					</button>

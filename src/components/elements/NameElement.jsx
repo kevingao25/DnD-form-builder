@@ -122,7 +122,7 @@ function NameElement(props) {
 				<div
 					ref={sortableRef}
 					style={{ opacity }}
-					className="form-group"
+					className={`form-group ${focused ? "border-left" : ""}`}
 					data-handler-id={handlerID}
 					id={{ id }}>
 					<div className="form-row">
@@ -152,12 +152,51 @@ function NameElement(props) {
 					<button
 						className="btn btn-success btn-sm rounded edit"
 						type="button"
-						data-toggle="tooltip"
 						data-placement="top"
 						title=""
-						data-original-title="Edit">
+						data-original-title="Edit"
+						data-toggle="modal"
+						data-target="#exampleModalLong">
 						<i className="fa fa-cog"></i>
 					</button>
+				</div>
+
+				{/* Modal */}
+				<div
+					class="modal fade"
+					id="exampleModalLong"
+					tabindex="-1"
+					role="dialog"
+					aria-labelledby="exampleModalLongTitle"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class ="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">
+									Modal title
+								</h5>
+								<button
+									type="button"
+									class="close"
+									data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">...</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal">
+									Close
+								</button>
+								<button type="button" class="btn btn-primary">
+									Save changes
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</Fragment>
 		);

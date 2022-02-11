@@ -120,21 +120,17 @@ function EmailElement(props) {
 				<div
 					ref={sortableRef}
 					style={{ opacity }}
-					className="form-group"
+					className={`form-group ${focused ? "border-left" : ""}`}
 					data-handler-id={handlerID}
 					id={{ id }}>
-					<form>
-						<div className="form-group">
-							<label htmlFor="exampleInputEmail1">Email Address</label>
-							<input
-								type="email"
-								className="form-control"
-								id="exampleInputEmail1"
-								aria-describedby="emailHelp"
-								placeholder="Enter email"
-							/>
-						</div>
-					</form>
+					<label htmlFor="exampleInputEmail1">Email Address</label>
+					<input
+						type="email"
+						className="form-control"
+						id="exampleInputEmail1"
+						aria-describedby="emailHelp"
+						placeholder="Enter email"
+					/>
 				</div>
 
 				<div className={focused ? "show-action-group" : "hide-action-group"}>

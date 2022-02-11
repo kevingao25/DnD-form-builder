@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import uniqid from "uniqid";
 import update from "immutability-helper";
+import { Motion, spring } from "react-motion";
 
 // Import field components
 import {
@@ -37,9 +38,14 @@ function BuildZone() {
 			};
 			setFields((oldFields) => [...oldFields, newField]);
 		},
+		// Test
+		hover: (item, monitor) => {
+			// console.log({ item });
+			// console.log(monitor.isOver({ shallow: true }));
+		},
 		// Detect whether the element is hovering over the build zone
 		collect: (monitor) => ({
-			isOver: monitor.isOver(),
+			isOver: monitor.isOver({ shallow: true }),
 		}),
 	});
 
@@ -67,6 +73,8 @@ function BuildZone() {
 		// Dynamic component name
 		const FieldElement = Map[field.name];
 		return (
+			// <Motion key={index} style={{ y: spring(10, { stiffness: 500, damping: 50 }) }}>
+			// 	{({ y }) => (
 			<FieldElement
 				onBuild={true}
 				key={field.id}
@@ -75,7 +83,12 @@ function BuildZone() {
 				type="sortable"
 				moveField={moveField}
 				deleteField={deleteField}
+				// style={{
+				// 	transform: "translate3d(0, " + y + "px, 0)",
+				// }}
 			/>
+			// )}
+			// </Motion>
 		);
 	};
 
@@ -106,19 +119,19 @@ function BuildZone() {
 		<div
 			ref={dropRef}
 			className={`build-zone mx-auto border rounded ${backgroundColor} shadow-sm`}>
-			<div className="container " style={{ padding: "20px 50px" }}>
-				{
-					// Conditionally render the build zone
-					emptyField ? (
+			{
+				// Conditionally render the build zone
+				emptyField ? (
+					<div className="container " style={{ padding: "20px 50px" }}>
 						<p className="text-muted lead text-center">Add Fields Here</p>
-					) : (
-						// Render the UI fields
-						fields.map((field, index) =>
-							renderElements(field, index, moveField, deleteField)
-						)
+					</div>
+				) : (
+					// Render the UI fields
+					fields.map((field, index) =>
+						renderElements(field, index, moveField, deleteField)
 					)
-				}
-			</div>
+				)
+			}
 		</div>
 	);
 }
