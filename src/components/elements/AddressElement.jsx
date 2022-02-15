@@ -8,14 +8,14 @@ import ConfigWrapper from "./Wrappers/ConfigWrapper";
 
 function AddressElement(props) {
 	// Deconstruct props
-	const { onBuild, type, moveField, index, id, deleteField } = props;
+	const { onBuild, type, moveField, index, id, deleteField, insertField } = props;
 
 	// --------------------------------------------------------------------
 	// *** Drag implementation of fields in element titles ***
 
 	const [{ titleDragging }, titleDrag] = useDrag({
 		type: type,
-		item: { name: "addressElement", index },
+		item: { name: "addressElement", type },
 		collect: (monitor) => ({
 			titleDragging: monitor.isDragging(),
 		}),
@@ -46,6 +46,7 @@ function AddressElement(props) {
 					sortableRef={sortableRef}
 					index={index}
 					moveField={moveField}
+					insertField={() => insertField}
 					setFocused={setFocused}
 					id={id}
 					fieldName="addressElement">
@@ -61,7 +62,11 @@ function AddressElement(props) {
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
-				<ConfigWrapper focused={focused}></ConfigWrapper>
+
+				<ConfigWrapper focused={focused}>
+					{/* **************** */}
+					{/* Write Modal here */}
+				</ConfigWrapper>
 			</Fragment>
 		);
 	}

@@ -73,8 +73,6 @@ function BuildZone() {
 		// Dynamic component name
 		const FieldElement = Map[field.name];
 		return (
-			// <Motion key={index} style={{ y: spring(10, { stiffness: 500, damping: 50 }) }}>
-			// 	{({ y }) => (
 			<FieldElement
 				onBuild={true}
 				key={field.id}
@@ -83,12 +81,7 @@ function BuildZone() {
 				type="sortable"
 				moveField={moveField}
 				deleteField={deleteField}
-				// style={{
-				// 	transform: "translate3d(0, " + y + "px, 0)",
-				// }}
 			/>
-			// )}
-			// </Motion>
 		);
 	};
 
@@ -103,6 +96,26 @@ function BuildZone() {
 			})
 		);
 	}, []);
+
+	// Insert fields in between fields
+	const insertField = (hoverIndex, fieldName, insertPosition) => {
+		const newField = {
+			name: fieldName,
+			id: uniqid("field-"),
+		};
+		console.log({ newField });
+
+		setFields((prevFields) => {
+			if (hoverIndex === 0 && insertPosition === "insert-before") {
+				prevFields.unshift(newField);
+			} else if (insertPosition === "insert-before") {
+				prevFields.splice(hoverIndex - 1, 0, newField);
+			} else if (insertPosition === "insert-after") {
+				prevFields.splice(hoverIndex, 0, newField);
+			}
+			return [...prevFields];
+		});
+	};
 
 	// Delete function
 	const deleteField = (id) => {
@@ -128,7 +141,7 @@ function BuildZone() {
 				) : (
 					// Render the UI fields
 					fields.map((field, index) =>
-						renderElements(field, index, moveField, deleteField)
+						renderElements(field, index, moveField, deleteField, insertField)
 					)
 				)
 			}

@@ -9,14 +9,14 @@ import ConfigWrapper from "./Wrappers/ConfigWrapper";
 
 function NameElement(props) {
 	// Deconstruct props
-	const { onBuild, type, moveField, index, id, deleteField } = props;
+	const { onBuild, type, moveField, index, id, deleteField, insertField } = props;
 
 	// --------------------------------------------------------------------
 	// *** Drag implementation of fields in element titles ***
 
 	const [{ titleDragging }, titleDrag] = useDrag({
 		type: type,
-		item: { name: "nameElement", index },
+		item: { name: "nameElement", type },
 		collect: (monitor) => ({
 			titleDragging: monitor.isDragging(),
 		}),
@@ -49,6 +49,7 @@ function NameElement(props) {
 					sortableRef={sortableRef}
 					index={index}
 					moveField={moveField}
+					insertField={insertField}
 					id={id}
 					setFocused={setFocused}
 					fieldName="nameElement">
@@ -75,7 +76,10 @@ function NameElement(props) {
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
-				<ConfigWrapper focused={focused}></ConfigWrapper>
+				<ConfigWrapper focused={focused}>
+					{/* **************** */}
+					{/* Write Modal here */}
+				</ConfigWrapper>
 			</Fragment>
 		);
 	}

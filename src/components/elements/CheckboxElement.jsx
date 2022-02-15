@@ -8,14 +8,14 @@ import ConfigWrapper from "./Wrappers/ConfigWrapper";
 
 function CheckboxElement(props) {
 	// Deconstruct props
-	const { onBuild, type, moveField, index, id, deleteField } = props;
+	const { onBuild, type, moveField, index, id, deleteField, insertField } = props;
 
 	// --------------------------------------------------------------------
 	// *** Drag implementation of fields in element titles ***
 
 	const [{ titleDragging }, titleDrag] = useDrag({
 		type: type,
-		item: { name: "checkboxElement", index },
+		item: { name: "checkboxElement", type },
 		collect: (monitor) => ({
 			titleDragging: monitor.isDragging(),
 		}),
@@ -47,6 +47,7 @@ function CheckboxElement(props) {
 					sortableRef={sortableRef}
 					index={index}
 					moveField={moveField}
+					insertField={insertField}
 					setFocused={setFocused}
 					id={id}
 					fieldName="checkboxElement">
@@ -67,7 +68,10 @@ function CheckboxElement(props) {
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
-				<ConfigWrapper focused={focused}></ConfigWrapper>
+				<ConfigWrapper focused={focused}>
+					{/* **************** */}
+					{/* Write Modal here */}
+				</ConfigWrapper>
 			</Fragment>
 		);
 	}
