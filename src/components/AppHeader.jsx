@@ -5,7 +5,7 @@ function AppHeader() {
 		<div className="navbar navbar-dark bg-dark shadow p-4">
 			<div className="container-fluid">
 				<a href="/" className="navbar-brand text-warning">
-					DnD Form Builder
+					Drag-and-Drop Form Builder
 				</a>
 			</div>
 		</div>
