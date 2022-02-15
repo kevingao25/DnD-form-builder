@@ -25,6 +25,18 @@ function EmailElement(props) {
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
 
+	// Configuration states
+	const initialConfig = {
+		label: "Email Address",
+		placeholder: "Enter Email",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// --------------------------------------------------------------------
 	// *** Rendering ***
 
@@ -51,13 +63,16 @@ function EmailElement(props) {
 					id={id}
 					fieldName="emailElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label id="exampleInputEmail" htmlFor="exampleInputEmail1">Email Address</label>
+						<label id="exampleInputEmail" htmlFor="exampleInputEmail1">
+							{/* Changed */}
+							{config.label}
+						</label>
 						<input
 							type="email"
 							className="form-control"
 							id="exampleInputEmail1"
 							aria-describedby="emailHelp"
-							placeholder="Enter email"
+							placeholder={config.placeholder} // Changed
 						/>
 					</div>
 					<br></br>
@@ -68,12 +83,17 @@ function EmailElement(props) {
 					{/* **************** */}
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-					<label>Label </label> <label style={{color: "red"}}>*</label>
+						<label>Label </label> <label style={{ color: "red" }}>*</label>
 						<input
 							className="form-control"
 							required
 							id=""
-							placeholder="Email Address"
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
 						/>
 					</div>
 
@@ -85,6 +105,12 @@ function EmailElement(props) {
 							className="form-control"
 							id=""
 							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
 						/>
 					</div>
 
@@ -92,44 +118,28 @@ function EmailElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>

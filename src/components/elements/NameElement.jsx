@@ -72,7 +72,7 @@ function NameElement(props) {
 								/>
 							</div>
 						</div>
-					</div> 
+					</div>
 					<br></br>
 				</DragDropWrapper>
 
@@ -81,86 +81,51 @@ function NameElement(props) {
 					{/* **************** */}
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-					<label>First Label </label> <label style={{color: "red"}}>*</label>
-						<input
-							className="form-control"
-							required
-							id=""
-							placeholder="First Name"
-						/>
-					<br></br>
-
-					<label>Second Label </label> <label style={{color: "red"}}>*</label>
-						<input
-							className="form-control"
-							required
-							id=""
-							placeholder="Last Name"
-						/>
+						<label>First Label </label> <label style={{ color: "red" }}>*</label>
+						<input className="form-control" required id="" placeholder="First Name" />
+						<br></br>
+						<label>Second Label </label> <label style={{ color: "red" }}>*</label>
+						<input className="form-control" required id="" placeholder="Last Name" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>First Placeholder</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 
 						<br></br>
-						
+
 						<label>Second Placeholder</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
 
 					<br></br>
