@@ -58,7 +58,6 @@ function FileElement(props) {
 							id="exampleFormControlFile1"
 						/>
 					</div>
-					<br></br>
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
@@ -66,71 +65,34 @@ function FileElement(props) {
 					{/* **************** */}
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-					<label>Label </label> <label style={{color: "red"}}>*</label>
-						<input
-							className="form-control"
-							required
-							id=""
-							placeholder="File Input"
-						/>
+						<label>Label </label> <label style={{ color: "red" }}>*</label>
+						<input className="form-control" required id="" placeholder="File Input" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
-						<input
-							className="form-control"
-							id=""
-							placeholder=""
-						/>
+						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					{/* Write Modal here */}
 				</ConfigWrapper>

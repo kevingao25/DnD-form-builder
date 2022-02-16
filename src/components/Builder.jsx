@@ -1,5 +1,4 @@
 import React from "react";
-import AppHeader from "./AppHeader";
 import BuildZone from "./BuildZone";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -26,7 +25,6 @@ import {
 function Builder() {
 	return (
 		<div className="main vh-100">
-			<AppHeader />
 			<DndProvider backend={HTML5Backend}>
 				<div className="container-fluid">
 					<div className="row">

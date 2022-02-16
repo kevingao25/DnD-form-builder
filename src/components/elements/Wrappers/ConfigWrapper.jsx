@@ -3,15 +3,11 @@ import Modal from "react-modal";
 
 const customStyles = {
 	content: {
-		// top: "50%",
-		// left: "50%",
-		// right: "auto",
 		bottom: "auto",
-		// marginRight: "-50%",
-		// transform: "translate(-50%, -50%)",
 		width: "75vw",
 		height: "75vh",
 		margin: "auto",
+		overflow: "scroll",
 	},
 };
 

@@ -64,7 +64,6 @@ function EmailElement(props) {
 					fieldName="emailElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label id="exampleInputEmail" htmlFor="exampleInputEmail1">
-							{/* Changed */}
 							{config.label}
 						</label>
 						<input
@@ -75,7 +74,6 @@ function EmailElement(props) {
 							placeholder={config.placeholder} // Changed
 						/>
 					</div>
-					<br></br>
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
@@ -97,8 +95,6 @@ function EmailElement(props) {
 						/>
 					</div>
 
-					<br></br>
-
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
 						<input
@@ -114,35 +110,25 @@ function EmailElement(props) {
 						/>
 					</div>
 
-					<br></br>
-
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
 						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
 						<input className="form-control" id="" placeholder="" />
 					</div>
 
-					<br></br>
-
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
 						<input className="form-control" id="" placeholder="" />
 					</div>
 
-					<br></br>
-
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
 						<input className="form-control" id="" placeholder="" />
 					</div>
-
-					<br></br>
 
 					{/* Write Modal here */}
 				</ConfigWrapper>
