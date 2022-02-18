@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import uniqid from "uniqid";
 import update from "immutability-helper";
-import { Motion, spring } from "react-motion";
 
 // Import field components
 import {

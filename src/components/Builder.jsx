@@ -2,85 +2,86 @@ import React from "react";
 import BuildZone from "./BuildZone";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import SwipeableViews from "react-swipeable-views";
+import { useTheme } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import AddFields from "./AddFields";
+import ListForms from "./ListForms";
 
-// Import field components
-import {
-	NameElement,
-	PasswordElement,
-	EmailElement,
-	TextareaElement,
-	AddressElement,
-	PhoneElement,
-	DateElement,
-	TimeElement,
-	WebsiteElement,
-	FileElement,
-	CheckboxElement,
-	RadioElement,
-	DropdownElement,
-	RatingElement,
-	SubmitElement,
-} from "./elements";
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}>
+			{value === index && (
+				<Box sx={{ pt: 3 }}>
+					<div>{children}</div>
+				</Box>
+			)}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`,
+	};
+}
 
 function Builder() {
+	const theme = useTheme();
+	const [value, setValue] = React.useState(1);
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+
+	const handleChangeIndex = (index) => {
+		setValue(index);
+	};
+
 	return (
 		<div className="main vh-100">
 			<DndProvider backend={HTML5Backend}>
 				<div className="container-fluid">
 					<div className="row">
-						{/* Field elements */}
 						<div className="col-4 pt-3 shadow-sm">
 							<div className="container px-4">
-								<span className="fs-5">Elements</span>
-								<hr />
-
-								<div className="row no-gutters">
-									<div className="col-xl-6">
-										<NameElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<EmailElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<PasswordElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<TextareaElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<PhoneElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<DateElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<TimeElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<WebsiteElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<FileElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<CheckboxElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<RadioElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<DropdownElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<RatingElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<SubmitElement type="field" />
-									</div>
-									<div className="col-xl-6">
-										<AddressElement type="field" />
-									</div>
-								</div>
+								{/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+									<Tabs
+										value={value}
+										onChange={handleChange}
+										aria-label="basic tabs example">
+										<Tab label="List Forms" {...a11yProps(0)} />
+										<Tab label="Add fields" {...a11yProps(1)} />
+									</Tabs>
+								</Box>
+								<SwipeableViews
+									axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+									index={value}
+									onChangeIndex={handleChangeIndex}>
+									<TabPanel value={value} index={0} dir={theme.direction}>
+										<ListForms />
+									</TabPanel>
+									<TabPanel value={value} index={1} dir={theme.direction}> */}
+								<AddFields />
+								{/* </TabPanel>
+								</SwipeableViews> */}
 							</div>
 						</div>
 

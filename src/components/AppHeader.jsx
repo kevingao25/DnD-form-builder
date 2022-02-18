@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import dndLogo from "../images/DnD-logo.png";
 
 function Login(props) {
 	const handleSubmit = () => {
@@ -51,12 +52,15 @@ function AppHeader() {
 
 	return (
 		<div className="navbar navbar-dark bg-dark shadow p-4">
-			<div className="container-fluid">
-				<a href="/" className="navbar-brand text-warning">
-					Drag-and-Drop Form Builder
-				</a>
-				{/* <Login loggedIn={loggedIn} /> */}
-			</div>
+			<a href="/" className="navbar-brand text-warning" style={{ padding: "0px" }}>
+				<img
+					src={dndLogo}
+					alt="logo"
+					style={{
+						width: "200px",
+					}}
+				/>
+			</a>
 		</div>
 	);
 }

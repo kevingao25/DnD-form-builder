@@ -15,7 +15,7 @@ import Container from "@mui/material/Container";
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import logo from "../images/logo.png";
+import logo from "../images/fiyge-logo.png";
 import "../App.css";
 
 function Signin() {
