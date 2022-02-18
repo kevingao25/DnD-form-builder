@@ -15,6 +15,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 function ListForms() {
 	// Fiyge form data
@@ -52,20 +53,18 @@ function ListForms() {
 	// Search bar
 	const [searchText, setSearchText] = useState("");
 
-	const searchHandler = (e) => {
-		setTimeout(setSearchText(e.target.value.toLowerCase()), 500);
-	};
-
 	// Testing purpose
 	console.log(formList);
 
 	const renderFormNames = (id, formName) => {
 		return (
-			<ListItem key={id} component="div" disablePadding>
+			<ListItem dense key={id} component="div" disablePadding sx={{ pr: 2 }}>
 				<ListItemButton>
-					<ListItemIcon>
-						<FormatAlignLeftIcon />
-					</ListItemIcon>
+					{window.innerWidth >= 1680 ? (
+						<ListItemIcon>
+							<FormatAlignLeftIcon />
+						</ListItemIcon>
+					) : null}
 					<ListItemText primary={formName} secondary={`ID: ${id}`} />
 					<IconButton edge="end" aria-label="delete">
 						<DeleteIcon />
@@ -85,11 +84,12 @@ function ListForms() {
 			</div>
 		);
 	} else {
+		let height = window.innerHeight - 210;
 		return (
-			<div>
+			<div style={{ height }}>
 				<TextField
 					id="outlined-basic"
-					onChange={searchHandler}
+					onChange={(e) => setSearchText(e.target.value)}
 					variant="outlined"
 					fullWidth
 					label="Search"
@@ -102,12 +102,29 @@ function ListForms() {
 						),
 					}}
 				/>
-				<List sx={{ pr: 1 }}>
-					{formList.map((form) =>
-						// <div key={form["forms.id"]}>{form["forms.full_name"]}</div>
-						renderFormNames(form["forms.id"], form["forms.full_name"])
+
+				{/* Use FixedSizeList for better performance */}
+				<AutoSizer>
+					{({ height, width }) => (
+						<FixedSizeList
+							style={{ marginTop: "10px" }}
+							height={height}
+							width={width}
+							itemSize={60}
+							itemCount={Object.keys(formList).length}>
+							{({ index, style }) => {
+								return (
+									<div style={style}>
+										{renderFormNames(
+											formList[index]["forms.id"],
+											formList[index]["forms.full_name"]
+										)}
+									</div>
+								);
+							}}
+						</FixedSizeList>
 					)}
-				</List>
+				</AutoSizer>
 			</div>
 		);
 	}
