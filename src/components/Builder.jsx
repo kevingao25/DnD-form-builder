@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BuildZone from "./BuildZone";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import AddFields from "./AddFields";
 import ListForms from "./ListForms";
 
+// Tab navigation
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
 
@@ -44,8 +45,12 @@ function a11yProps(index) {
 }
 
 function Builder() {
+	// Tab Navigation
 	const theme = useTheme();
-	const [value, setValue] = React.useState(1);
+	const [value, setValue] = useState(1);
+
+	// Fiyge form data
+	// const [formList, setFormList] = useState();
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -56,13 +61,13 @@ function Builder() {
 	};
 
 	return (
-		<div className="main vh-100">
+		<div className="builder">
 			<DndProvider backend={HTML5Backend}>
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-4 pt-3 shadow-sm">
+						<div className="col-4 fill-height scroll pt-3 shadow-sm">
 							<div className="container px-4">
-								{/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+								<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 									<Tabs
 										value={value}
 										onChange={handleChange}
@@ -75,17 +80,20 @@ function Builder() {
 									axis={theme.direction === "rtl" ? "x-reverse" : "x"}
 									index={value}
 									onChangeIndex={handleChangeIndex}>
-									<TabPanel value={value} index={0} dir={theme.direction}>
+									<TabPanel
+										value={value}
+										index={0}
+										sx={{ padding: "0px" }}
+										dir={theme.direction}>
 										<ListForms />
 									</TabPanel>
-									<TabPanel value={value} index={1} dir={theme.direction}> */}
-								<AddFields />
-								{/* </TabPanel>
-								</SwipeableViews> */}
+									<TabPanel value={value} index={1} dir={theme.direction}>
+										<AddFields />
+									</TabPanel>
+								</SwipeableViews>
 							</div>
 						</div>
 
-						{/* Build zone */}
 						<div className="col-8 fill-height scroll shadow-sm">
 							<BuildZone />
 						</div>
