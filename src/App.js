@@ -30,6 +30,8 @@ import {
 	faCheck,
 	faAddressCard,
 	faSignature,
+	faMoneyBill,
+	faHashtag,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -48,7 +50,9 @@ library.add(
 	faHandPointer,
 	faCheck,
 	faAddressCard,
-	faSignature
+	faSignature,
+	faMoneyBill,
+	faHashtag,
 );
 
 function App() {

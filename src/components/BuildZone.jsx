@@ -20,6 +20,8 @@ import {
 	DropdownElement,
 	RatingElement,
 	SubmitElement,
+	CurrencyElement,
+	NumberElement,
 } from "./elements";
 
 function BuildZone() {
@@ -65,6 +67,8 @@ function BuildZone() {
 		dropdownElement: DropdownElement,
 		ratingElement: RatingElement,
 		submitElement: SubmitElement,
+		CurrencyElement: CurrencyElement,
+		NumberElement: NumberElement,
 	};
 
 	// Pass down to BuildZone component for fields UI rendering

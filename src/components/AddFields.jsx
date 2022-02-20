@@ -16,6 +16,8 @@ import {
 	DropdownElement,
 	RatingElement,
 	SubmitElement,
+	CurrencyElement,
+	NumberElement
 } from "./elements";
 
 function AddFields() {
@@ -43,6 +45,9 @@ function AddFields() {
 				<TimeElement type="field" />
 			</div>
 			<div className="col-xl-6">
+				<NumberElement type="field" />
+			</div>
+			<div className="col-xl-6">
 				<WebsiteElement type="field" />
 			</div>
 			<div className="col-xl-6">
@@ -65,6 +70,9 @@ function AddFields() {
 			</div>
 			<div className="col-xl-6">
 				<AddressElement type="field" />
+			</div>
+			<div className="col-xl-6">
+				<CurrencyElement type="field" />
 			</div>
 		</div>
 	);
