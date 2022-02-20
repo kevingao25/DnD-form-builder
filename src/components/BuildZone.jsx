@@ -22,6 +22,8 @@ import {
 	SubmitElement,
 	CurrencyElement,
 	NumberElement,
+	CancelElement,
+	HeaderElement,
 } from "./elements";
 
 function BuildZone() {
@@ -69,6 +71,8 @@ function BuildZone() {
 		submitElement: SubmitElement,
 		CurrencyElement: CurrencyElement,
 		NumberElement: NumberElement,
+		CancelElement: CancelElement,
+		HeaderElement: HeaderElement,
 	};
 
 	// Pass down to BuildZone component for fields UI rendering

@@ -21,6 +21,17 @@ function NumberElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Number",
+		placeholder: "123",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -51,12 +62,12 @@ function NumberElement(props) {
 					id={id}
 					fieldName="NumberElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-					<label htmlFor="inputAddress">Number</label>
+					<label htmlFor="inputAddress">{config.label}</label>
 						<input
 							type="text"
 							className="form-control"
 							id=""
-							placeholder="123"
+							placeholder={config.placeholder}
 						/>
 					</div>
 				</DragDropWrapper>
@@ -67,12 +78,34 @@ function NumberElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Number" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.placeholder}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

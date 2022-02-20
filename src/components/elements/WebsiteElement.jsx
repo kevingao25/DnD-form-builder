@@ -21,6 +21,17 @@ function WebsiteElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Website Link/URL",
+		placeholder: "https://example.com",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -51,12 +62,12 @@ function WebsiteElement(props) {
 					id={id}
 					fieldName="websiteElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="url">Website Link/URL: </label>
+						<label htmlFor="url">{config.label}</label> <br></br>
 						<input
 							type="url"
 							name="url"
 							id="url"
-							placeholder="https://example.com"
+							placeholder={config.placeholder}
 							pattern="https://.*"
 							size="30"
 							className="form-control-sm"
@@ -70,14 +81,35 @@ function WebsiteElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Web/URL" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
-
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.placeholder}
+						/>
 					</div>
-
+					
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
 						<input className="form-control" id="" placeholder="" />

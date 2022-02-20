@@ -21,6 +21,16 @@ function FileElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "File Element",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -51,7 +61,7 @@ function FileElement(props) {
 					id={id}
 					fieldName="fileElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="exampleFormControlFile1">File Input</label>
+						<label htmlFor="exampleFormControlFile1">{config.label}</label>
 						<input
 							type="file"
 							className="form-control-file"
@@ -66,12 +76,18 @@ function FileElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="File Input" />
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

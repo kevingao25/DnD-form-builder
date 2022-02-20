@@ -21,6 +21,17 @@ function CurrencyElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Currency",
+		placeholder: "Canadian Dollar",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -51,12 +62,12 @@ function CurrencyElement(props) {
 					id={id}
 					fieldName="CurrencyElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-					<label htmlFor="inputAddress">Currency</label>
+					<label htmlFor="inputAddress">{config.label}</label>
 						<input
 							type="text"
 							className="form-control"
 							id=""
-							placeholder="Canadian Dollar"
+							placeholder={config.placeholder}
 						/>
 					</div>
 				</DragDropWrapper>
@@ -67,12 +78,34 @@ function CurrencyElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Currency" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.placeholder}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

@@ -32,6 +32,8 @@ import {
 	faSignature,
 	faMoneyBill,
 	faHashtag,
+	faBan,
+	faHeading,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -53,6 +55,8 @@ library.add(
 	faSignature,
 	faMoneyBill,
 	faHashtag,
+	faBan,
+	faHeading,
 );
 
 function App() {

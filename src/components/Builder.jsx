@@ -96,7 +96,7 @@ function Builder() {
 						</div>
 
 						<div className="col-8 fill-height scroll shadow-sm">
-							<BuildZone />
+							<BuildZone /> <br></br><br></br>
 						</div>
 					</div>
 				</div>

@@ -5,8 +5,9 @@ import { useDrag, useDrop } from "react-dnd";
 import DragDropWrapper from "./Wrappers/DragDropWrapper";
 import DeleteIcon from "./Wrappers/DeleteIcon";
 import ConfigWrapper from "./Wrappers/ConfigWrapper";
+import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 
-function AddressElement(props) {
+function HeaderElement(props) {
 	// Deconstruct props
 	const { onBuild, type, moveField, index, id, deleteField, insertField } = props;
 
@@ -15,15 +16,19 @@ function AddressElement(props) {
 
 	const [{ titleDragging }, titleDrag] = useDrag({
 		type: type,
-		item: { name: "addressElement", type },
+		item: { name: "HeaderElement", type },
 		collect: (monitor) => ({
 			titleDragging: monitor.isDragging(),
 		}),
 	});
 
+	// React hooks
+	const [focused, setFocused] = useState(false);
+	const sortableRef = useRef(null);
+
+	// Configuration states
 	const initialConfig = {
-		label: "Address",
-		placeholder: "123 Main St",
+		label: "Header",
 		elementType: "",
 		class: "",
 		primaryKey: "",
@@ -32,22 +37,18 @@ function AddressElement(props) {
 
 	const [config, setConfig] = useState(initialConfig);
 
-	// React hooks
-	const [focused, setFocused] = useState(false);
-	const sortableRef = useRef(null);
-
 	// --------------------------------------------------------------------
 	// *** Rendering ***
 
-	let opacity;
-
+	let opacity = 1;
+	// Conditionally rendering the element
 	if (onBuild !== true) {
 		// Title rendering
 		opacity = titleDragging ? 0.4 : 1;
 		return (
 			<div ref={titleDrag} style={{ opacity }} className="field-element">
-				<FontAwesomeIcon icon="address-card" fixedWidth />
-				<span className="field-text">Address</span>
+				<FontAwesomeIcon icon="heading" fixedWidth />
+				<span className="field-text">Header</span>
 			</div>
 		);
 	} else {
@@ -57,25 +58,25 @@ function AddressElement(props) {
 					sortableRef={sortableRef}
 					index={index}
 					moveField={moveField}
-					insertField={() => insertField}
+					insertField={insertField}
 					setFocused={setFocused}
 					id={id}
-					fieldName="addressElement">
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="inputAddress">{config.label}</label>
-						<input
-							type="text"
-							className="form-control"
-							id="inputAddress"
-							placeholder={config.placeholder}
-						/>
+					fieldName="HeaderElement">
+					<div className={`form-group ${focused ? "border-left" : ""}`} style={{
+						marginBottom: "2.5em", marginTop: "1.5em", display: "flex",
+						justifyContent: "center",
+						alignItems: "center"
+					}}>
+						<h1 style={{ position: "absolute", alignContent: "center" }}>
+							{config.label}
+						</h1>
 					</div>
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
-
 				<ConfigWrapper focused={focused}>
 					{/* **************** */}
+
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
 						<input
@@ -89,22 +90,6 @@ function AddressElement(props) {
 								}))
 							}
 							placeholder={config.label}
-						/>
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input
-							className="form-control"
-							required
-							id=""
-							onChange={(e) =>
-								setConfig((prevConfig) => ({
-									...prevConfig,
-									placeholder: e.target.value,
-								}))
-							}
-							placeholder={config.placeholder}
 						/>
 					</div>
 
@@ -135,4 +120,4 @@ function AddressElement(props) {
 	}
 }
 
-export default AddressElement;
+export default HeaderElement;

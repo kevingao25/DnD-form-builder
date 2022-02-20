@@ -24,6 +24,16 @@ function TimeElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Time",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -58,7 +68,7 @@ function TimeElement(props) {
 					id={id}
 					fieldName="timeElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="timePicker">Time Picker</label>
+						<label htmlFor="timePicker">{config.label}</label> <br></br>
 						<TimePicker></TimePicker>
 					</div>
 				</DragDropWrapper>
@@ -69,12 +79,18 @@ function TimeElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Time" />
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

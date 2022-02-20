@@ -17,7 +17,9 @@ import {
 	RatingElement,
 	SubmitElement,
 	CurrencyElement,
-	NumberElement
+	NumberElement,
+	CancelElement,
+	HeaderElement
 } from "./elements";
 
 function AddFields() {
@@ -31,6 +33,9 @@ function AddFields() {
 			</div>
 			<div className="col-xl-6">
 				<PasswordElement type="field" />
+			</div>
+			<div className="col-xl-6">
+				<HeaderElement type="field" />
 			</div>
 			<div className="col-xl-6">
 				<TextareaElement type="field" />
@@ -67,6 +72,9 @@ function AddFields() {
 			</div>
 			<div className="col-xl-6">
 				<SubmitElement type="field" />
+			</div>
+			<div className="col-xl-6">
+				<CancelElement type="field" />
 			</div>
 			<div className="col-xl-6">
 				<AddressElement type="field" />

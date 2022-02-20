@@ -22,6 +22,16 @@ function RatingElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Your Rating",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -58,7 +68,7 @@ function RatingElement(props) {
 					id={id}
 					fieldName="ratingElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="rating">Your Rating</label>
+						<label htmlFor="rating">{config.label}</label>
 						<ReactStars
 							count={5}
 							onChange={ratingChanged}
@@ -75,12 +85,18 @@ function RatingElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Your Rating" />
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

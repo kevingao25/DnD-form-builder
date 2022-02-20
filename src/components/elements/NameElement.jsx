@@ -22,6 +22,19 @@ function NameElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		first_label: "First Name",
+		second_label: "Last Name",
+		first_placeholder: "First Name",
+		second_placeholder: "Last Name",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -56,19 +69,19 @@ function NameElement(props) {
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<div className="form-row">
 							<div className="col">
-								<label htmlFor="firstName">First name</label>
+								<label htmlFor="firstName">{config.first_label}</label>
 								<input
 									type="text"
 									className="form-control"
-									placeholder="First name"
+									placeholder={config.first_placeholder}
 								/>
 							</div>
 							<div className="col">
-								<label htmlFor="lastName">Last name</label>
+								<label htmlFor="lastName">{config.second_label}</label>
 								<input
 									type="text"
 									className="form-control"
-									placeholder="Last name"
+									placeholder={config.second_placeholder}
 								/>
 							</div>
 						</div>
@@ -81,17 +94,62 @@ function NameElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>First Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="First Name" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									first_label: e.target.value,
+								}))
+							}
+							placeholder={config.first_label}
+						/>
+
 						<label>Second Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Last Name" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									second_label: e.target.value,
+								}))
+							}
+							placeholder={config.second_label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>First Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									first_placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.first_placeholder}
+						/>
 
 						<label>Second Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									second_placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.second_placeholder}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

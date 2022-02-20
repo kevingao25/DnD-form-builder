@@ -21,6 +21,17 @@ function PhoneElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Phone Number",
+		placeholder: "123-456-7890",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -52,12 +63,12 @@ function PhoneElement(props) {
 					fieldName="phoneElement">
 					<form>
 						<div className={`form-group ${focused ? "border-left" : ""}`}>
-							<label htmlFor="phone">Phone Number:</label>
+							<label htmlFor="phone">{config.label}</label> <br></br>
 							<input
 								type="tel"
 								id="phone"
 								name="phone"
-								placeholder="123-456-7890"
+								placeholder={config.placeholder}
 								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 								className="form-control-sm"
 							/>
@@ -71,12 +82,34 @@ function PhoneElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Phone" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.placeholder}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

@@ -21,6 +21,17 @@ function PasswordElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Password",
+		placeholder: "Enter Your Password",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -52,12 +63,12 @@ function PasswordElement(props) {
 					fieldName="passwordElement">
 					<form>
 						<div className={`form-group ${focused ? "border-left" : ""}`}>
-							<label htmlFor="exampleInputPassword1">Password</label>
+							<label htmlFor="exampleInputPassword1">{config.label}</label>
 							<input
 								type="password"
 								className="form-control"
 								id="exampleInputPassword1"
-								placeholder="Password"
+								placeholder={config.placeholder}
 							/>
 						</div>
 					</form>
@@ -69,12 +80,34 @@ function PasswordElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Password" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									placeholder: e.target.value,
+								}))
+							}
+							placeholder={config.placeholder}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

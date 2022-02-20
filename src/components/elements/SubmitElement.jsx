@@ -21,6 +21,18 @@ function SubmitElement(props) {
 		}),
 	});
 
+	const initialConfig = {
+		label: "Submit",
+		placeholder: "",
+		elementType: "",
+		class: "",
+		primaryKey: "",
+		moduleName: "",
+	};
+
+	const [config, setConfig] = useState(initialConfig);
+
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -52,7 +64,7 @@ function SubmitElement(props) {
 					fieldName="submitElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<button type="button" className="btn btn-outline-dark">
-							Submit
+						{config.label}
 						</button>
 					</div>
 				</DragDropWrapper>
@@ -63,12 +75,18 @@ function SubmitElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
-						<input className="form-control" required id="" placeholder="Submit" />
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							required
+							id=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									label: e.target.value,
+								}))
+							}
+							placeholder={config.label}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>

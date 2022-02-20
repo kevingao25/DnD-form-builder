@@ -6,7 +6,7 @@ import DragDropWrapper from "./Wrappers/DragDropWrapper";
 import DeleteIcon from "./Wrappers/DeleteIcon";
 import ConfigWrapper from "./Wrappers/ConfigWrapper";
 
-function AddressElement(props) {
+function CancelElement(props) {
 	// Deconstruct props
 	const { onBuild, type, moveField, index, id, deleteField, insertField } = props;
 
@@ -15,15 +15,15 @@ function AddressElement(props) {
 
 	const [{ titleDragging }, titleDrag] = useDrag({
 		type: type,
-		item: { name: "addressElement", type },
+		item: { name: "CancelElement", type },
 		collect: (monitor) => ({
 			titleDragging: monitor.isDragging(),
 		}),
 	});
 
 	const initialConfig = {
-		label: "Address",
-		placeholder: "123 Main St",
+		label: "Cancel",
+		placeholder: "",
 		elementType: "",
 		class: "",
 		primaryKey: "",
@@ -38,16 +38,16 @@ function AddressElement(props) {
 
 	// --------------------------------------------------------------------
 	// *** Rendering ***
-
 	let opacity;
 
+	// Conditionally rendering the element
 	if (onBuild !== true) {
 		// Title rendering
 		opacity = titleDragging ? 0.4 : 1;
 		return (
 			<div ref={titleDrag} style={{ opacity }} className="field-element">
-				<FontAwesomeIcon icon="address-card" fixedWidth />
-				<span className="field-text">Address</span>
+				<FontAwesomeIcon icon="ban" fixedWidth />
+				<span className="field-text">Cancel</span>
 			</div>
 		);
 	} else {
@@ -57,25 +57,21 @@ function AddressElement(props) {
 					sortableRef={sortableRef}
 					index={index}
 					moveField={moveField}
-					insertField={() => insertField}
+					insertField={insertField}
 					setFocused={setFocused}
 					id={id}
-					fieldName="addressElement">
+					fieldName="CancelElement">
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label htmlFor="inputAddress">{config.label}</label>
-						<input
-							type="text"
-							className="form-control"
-							id="inputAddress"
-							placeholder={config.placeholder}
-						/>
+						<button type="button" className="btn btn-outline-danger">
+						{config.label}
+						</button>
 					</div>
 				</DragDropWrapper>
 
 				<DeleteIcon focused={focused} deleteField={() => deleteField(id)}></DeleteIcon>
-
 				<ConfigWrapper focused={focused}>
 					{/* **************** */}
+
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Label </label> <label style={{ color: "red" }}>*</label>
 						<input
@@ -89,22 +85,6 @@ function AddressElement(props) {
 								}))
 							}
 							placeholder={config.label}
-						/>
-					</div>
-
-					<div className={`form-group ${focused ? "border-left" : ""}`}>
-						<label>Placeholder</label>
-						<input
-							className="form-control"
-							required
-							id=""
-							onChange={(e) =>
-								setConfig((prevConfig) => ({
-									...prevConfig,
-									placeholder: e.target.value,
-								}))
-							}
-							placeholder={config.placeholder}
 						/>
 					</div>
 
@@ -135,4 +115,4 @@ function AddressElement(props) {
 	}
 }
 
-export default AddressElement;
+export default CancelElement;

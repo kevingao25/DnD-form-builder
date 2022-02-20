@@ -15,3 +15,5 @@ export { default as RatingElement } from "./RatingElement";
 export { default as SubmitElement } from "./SubmitElement";
 export { default as CurrencyElement } from "./CurrencyElement";
 export { default as NumberElement } from "./NumberElement";
+export { default as CancelElement } from "./CancelElement";
+export { default as HeaderElement } from "./HeaderElement";
