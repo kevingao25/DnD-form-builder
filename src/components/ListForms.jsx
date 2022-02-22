@@ -50,9 +50,6 @@ function ListForms() {
 			});
 	}, []);
 
-	// Search bar
-	const [searchText, setSearchText] = useState("");
-
 	// Testing purpose
 	console.log(formList);
 
@@ -74,6 +71,15 @@ function ListForms() {
 		);
 	};
 
+	// Search bar
+	const [inputText, setInputText] = useState("");
+
+	let inputHandler = (e) => {
+		//convert input text to lower case
+		var lowerCase = e.target.value.toLowerCase();
+		setInputText(lowerCase);
+	};
+
 	if (error) {
 		return <div>An error has occur...</div>;
 	} else if (!formList) {
@@ -85,11 +91,23 @@ function ListForms() {
 		);
 	} else {
 		let height = window.innerHeight - 210;
+		const filteredData = formList.filter((el) => {
+			//if no input the return the original
+			if (inputText === "") {
+				return el;
+			}
+			//return the item which contains the user input
+			else {
+				return el["forms.full_name"].toLowerCase().includes(inputText);
+			}
+		});
+
+		console.log({ filteredData });
 		return (
 			<div style={{ height }}>
 				<TextField
 					id="outlined-basic"
-					onChange={(e) => setSearchText(e.target.value)}
+					onChange={inputHandler}
 					variant="outlined"
 					fullWidth
 					label="Search"
@@ -111,13 +129,14 @@ function ListForms() {
 							height={height}
 							width={width}
 							itemSize={60}
-							itemCount={Object.keys(formList).length}>
-							{({ index, style }) => {
+							itemData={filteredData}
+							itemCount={Object.keys(filteredData).length}>
+							{({ data, index, style }) => {
 								return (
 									<div style={style}>
 										{renderFormNames(
-											formList[index]["forms.id"],
-											formList[index]["forms.full_name"]
+											data[index]["forms.id"],
+											data[index]["forms.full_name"]
 										)}
 									</div>
 								);
