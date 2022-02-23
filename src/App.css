@@ -117,7 +117,7 @@ label {
 .delete {
 	position: absolute;
 	right: -80px;
-	top: -94px;
+	top: -74px;
 	height: 31px;
 	text-align: center;
 }
@@ -125,7 +125,7 @@ label {
 .edit {
 	position: absolute;
 	right: -80px;
-	top: -59px;
+	top: -39px;
 	height: 31px;
 	text-align: center;
 }

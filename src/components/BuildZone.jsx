@@ -2,6 +2,9 @@ import React, { useState, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import uniqid from "uniqid";
 import update from "immutability-helper";
+import Button from "@mui/material/Button";
+import Modal from "react-modal";
+import Card from "@mui/material/Card";
 
 // Import field components
 import {
@@ -27,31 +30,6 @@ import {
 } from "./elements";
 
 function BuildZone() {
-	// Track the list of fields in the build zone for rendering
-	const [fields, setFields] = useState([]);
-
-	// useDrop hook
-	const [{ isOver }, dropRef] = useDrop({
-		accept: "field",
-		drop: (item, monitor) => {
-			// Append the dropped elements to the state
-			const newField = {
-				name: monitor.getItem().name,
-				id: uniqid("field-"),
-			};
-			setFields((oldFields) => [...oldFields, newField]);
-		},
-		// Test
-		hover: (item, monitor) => {
-			// console.log({ item });
-			// console.log(monitor.isOver({ shallow: true }));
-		},
-		// Detect whether the element is hovering over the build zone
-		collect: (monitor) => ({
-			isOver: monitor.isOver({ shallow: true }),
-		}),
-	});
-
 	// name <-> components
 	const Map = {
 		nameElement: NameElement,
@@ -75,10 +53,47 @@ function BuildZone() {
 		HeaderElement: HeaderElement,
 	};
 
+	// Track the list of fields in the build zone for rendering
+	const [fields, setFields] = useState({
+		model: "form",
+		"forms.full_name": "Drag and drop form",
+		components: [],
+	});
+
+	// Grab children initial configuration and add into field state
+	const updateConfig = (config, index) => {
+		const newField = update(fields, {
+			components: {
+				[index]: { $merge: config },
+			},
+		});
+		console.log(newField);
+		setFields(newField);
+	};
+
+	const handleDrop = (item, monitor) => {
+		const temp = update(fields, {
+			components: {
+				$push: [{ name: monitor.getItem().name, id: uniqid("field-") }],
+			},
+		});
+		setFields(temp);
+	};
+
+	// Drop field elements on build zone
+	const [{ isOver }, dropRef] = useDrop({
+		accept: "field",
+		drop: (item, monitor) => handleDrop(item, monitor),
+		collect: (monitor) => ({
+			isOver: monitor.isOver({ shallow: true }),
+		}),
+	});
+
 	// Pass down to BuildZone component for fields UI rendering
-	const renderElements = (field, index, moveField, deleteField) => {
+	const renderElements = (field, index, moveField, deleteField, updateConfig) => {
 		// Dynamic component name
 		const FieldElement = Map[field.name];
+
 		return (
 			<FieldElement
 				onBuild={true}
@@ -88,6 +103,7 @@ function BuildZone() {
 				type="sortable"
 				moveField={moveField}
 				deleteField={deleteField}
+				updateConfig={updateConfig}
 			/>
 		);
 	};
@@ -96,44 +112,78 @@ function BuildZone() {
 	const moveField = useCallback((dragIndex, hoverIndex) => {
 		setFields((prevFields) =>
 			update(prevFields, {
-				$splice: [
-					[dragIndex, 1],
-					[hoverIndex, 0, prevFields[dragIndex]],
-				],
+				components: {
+					$splice: [
+						[dragIndex, 1],
+						[hoverIndex, 0, prevFields.components[dragIndex]],
+					],
+				},
 			})
 		);
 	}, []);
 
 	// Insert fields in between fields
-	const insertField = (hoverIndex, fieldName, insertPosition) => {
-		const newField = {
-			name: fieldName,
-			id: uniqid("field-"),
-		};
-		console.log({ newField });
+	// const insertField = (hoverIndex, fieldName, insertPosition) => {
+	// 	const newField = {
+	// 		name: fieldName,
+	// 		id: uniqid("field-"),
+	// 	};
+	// 	console.log({ newField });
 
-		setFields((prevFields) => {
-			if (hoverIndex === 0 && insertPosition === "insert-before") {
-				prevFields.unshift(newField);
-			} else if (insertPosition === "insert-before") {
-				prevFields.splice(hoverIndex - 1, 0, newField);
-			} else if (insertPosition === "insert-after") {
-				prevFields.splice(hoverIndex, 0, newField);
-			}
-			return [...prevFields];
-		});
-	};
+	// 	setFields((prevFields) => {
+	// 		if (hoverIndex === 0 && insertPosition === "insert-before") {
+	// 			prevFields.unshift(newField);
+	// 		} else if (insertPosition === "insert-before") {
+	// 			prevFields.splice(hoverIndex - 1, 0, newField);
+	// 		} else if (insertPosition === "insert-after") {
+	// 			prevFields.splice(hoverIndex, 0, newField);
+	// 		}
+	// 		return [...prevFields];
+	// 	});
+	// };
 
 	// Delete function
 	const deleteField = (id) => {
-		const newFields = fields.filter((field) => {
-			return field.id !== id;
+		// const newFields = fields.filter((field) => {
+		// 	return field.id !== id;
+		// });
+		const newFields = update(fields, {
+			components: {
+				$apply: (field) =>
+					field.filter((item) => {
+						return item.id !== id;
+					}),
+			},
 		});
 		setFields(newFields);
 	};
 
 	const backgroundColor = isOver ? "bg-warning" : "bg-light";
-	const emptyField = fields.length === 0 ? true : false;
+	const emptyField = fields.components.length === 0 ? true : false;
+
+	// Modal
+	let subtitle;
+	const [modalIsOpen, setIsOpen] = React.useState(false);
+
+	function openModal() {
+		setIsOpen(true);
+	}
+	function afterOpenModal() {
+		subtitle.style.color = "#f00";
+	}
+	function closeModal() {
+		setIsOpen(false);
+	}
+
+	const customStyles = {
+		content: {
+			bottom: "auto",
+			width: "40vw",
+			height: "75vh",
+			margin: "auto",
+			overflow: "scroll",
+		},
+	};
 
 	return (
 		<div
@@ -143,13 +193,42 @@ function BuildZone() {
 				// Conditionally render the build zone
 				emptyField ? (
 					<div className="container " style={{ padding: "20px 50px" }}>
-						<p className="text-muted lead text-center">Add Fields Here</p>
+						<p className="text-muted lead text-center">Render Fields Here</p>
 					</div>
 				) : (
-					// Render the UI fields
-					fields.map((field, index) =>
-						renderElements(field, index, moveField, deleteField, insertField)
-					)
+					<div>
+						<Button
+							variant="outlined"
+							onMouseDown={openModal}
+							style={{
+								position: "absolute",
+								top: "20px",
+								right: "80px",
+							}}>
+							Export
+						</Button>
+						<Modal
+							isOpen={modalIsOpen}
+							onAfterOpen={afterOpenModal}
+							onRequestClose={closeModal}
+							style={customStyles}
+							contentLabel="Example Modal">
+							<div class="modal-header">
+								<h5 class="modal-title">Export JSON</h5>
+								<button
+									type="button"
+									class="btn-close"
+									aria-label="Close"
+									onClick={closeModal}></button>
+							</div>
+							<Card variant="outlined" sx={{ mt: 3, pl: 4, pt: 2 }}>
+								<pre>{JSON.stringify(fields, null, 2)}</pre>
+							</Card>
+						</Modal>
+						{fields.components.map((field, index) =>
+							renderElements(field, index, moveField, deleteField, updateConfig)
+						)}
+					</div>
 				)
 			}
 		</div>

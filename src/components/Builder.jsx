@@ -10,7 +10,6 @@ import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import AddFields from "./AddFields";
 import ListForms from "./ListForms";
-import { positions } from "@mui/system";
 
 // Tab navigation
 function TabPanel(props) {
@@ -49,9 +48,6 @@ function Builder() {
 	// Tab Navigation
 	const theme = useTheme();
 	const [value, setValue] = useState(1);
-
-	// Fiyge form data
-	// const [formList, setFormList] = useState();
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -96,7 +92,7 @@ function Builder() {
 						</div>
 
 						<div className="col-8 fill-height scroll shadow-sm">
-							<BuildZone /> <br></br><br></br>
+							<BuildZone />
 						</div>
 					</div>
 				</div>

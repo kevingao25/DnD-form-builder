@@ -37,6 +37,12 @@ function HeaderElement(props) {
 
 	const [config, setConfig] = useState(initialConfig);
 
+	useEffect(() => {
+		if (onBuild) {
+			props.updateConfig(config, index);
+		}
+	}, [config]);
+
 	// --------------------------------------------------------------------
 	// *** Rendering ***
 
@@ -62,14 +68,17 @@ function HeaderElement(props) {
 					setFocused={setFocused}
 					id={id}
 					fieldName="HeaderElement">
-					<div className={`form-group ${focused ? "border-left" : ""}`} style={{
-						marginBottom: "2.5em", marginTop: "1.5em", display: "flex",
-						justifyContent: "center",
-						alignItems: "center"
-					}}>
-						<h1 style={{ position: "absolute", alignContent: "center" }}>
-							{config.label}
-						</h1>
+					<div
+						className={`form-group ${focused ? "border-left" : ""}`}
+						style={{
+							// marginBottom: "1em",
+							// marginTop: "1.5em",
+							paddingBottom: "0px",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}>
+						<h2 style={{ alignContent: "center" }}>{config.label}</h2>
 					</div>
 				</DragDropWrapper>
 
@@ -95,22 +104,62 @@ function HeaderElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									elementType: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									class: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									primaryKey: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									publicKey: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					{/* Write Modal here */}

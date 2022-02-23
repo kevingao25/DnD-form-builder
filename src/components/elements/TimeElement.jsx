@@ -34,6 +34,12 @@ function TimeElement(props) {
 
 	const [config, setConfig] = useState(initialConfig);
 
+	useEffect(() => {
+		if (onBuild) {
+			props.updateConfig(config, index);
+		}
+	}, [config]);
+
 	// React hooks
 	const [focused, setFocused] = useState(false);
 	const sortableRef = useRef(null);
@@ -95,22 +101,62 @@ function TimeElement(props) {
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Element Type</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									elementType: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Class</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									class: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Primary Key</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									primaryKey: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					<div className={`form-group ${focused ? "border-left" : ""}`}>
 						<label>Module Name</label>
-						<input className="form-control" id="" placeholder="" />
+						<input
+							className="form-control"
+							id=""
+							placeholder=""
+							onChange={(e) =>
+								setConfig((prevConfig) => ({
+									...prevConfig,
+									publicKey: e.target.value,
+								}))
+							}
+						/>
 					</div>
 
 					{/* Write Modal here */}

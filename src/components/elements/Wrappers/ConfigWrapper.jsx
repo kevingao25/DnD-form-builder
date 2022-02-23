@@ -51,22 +51,15 @@ function ConfigWrapper(props) {
 				onRequestClose={closeModal}
 				style={customStyles}
 				contentLabel="Example Modal">
-				{/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-				
-				<div>I am a modal</div>
-				<form></form> */}
-
 				<div class="modal-header">
 					<h5 class="modal-title">Element Configuration</h5>
-					<button type="button" class="btn-close" aria-label="Close" onClick={closeModal}></button>
+					<button
+						type="button"
+						class="btn-close"
+						aria-label="Close"
+						onClick={closeModal}></button>
 				</div>
-				{/* <div className="container">
-					<h2>Component</h2>
-					<div className="form-group">
-						<label htmlFor="component label">Label</label>
-						<input type="text" className="form-control" placeholder="Text Field" />
-					</div>
-				</div> */}
+
 				{props.children}
 			</Modal>
 		</div>
