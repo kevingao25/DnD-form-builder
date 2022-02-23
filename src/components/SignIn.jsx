@@ -128,7 +128,7 @@ function Signin() {
 						</Button>
 
 						<div className="hr-text"></div>
-						<Stack sx={{ pt: 1 }} direction="row" spacing={2} justifyContent="center">
+						{/* <Stack sx={{ pt: 1 }} direction="row" spacing={2} justifyContent="center">
 							<Grid container>
 								<Grid item>
 									<Link href="https://builder.fiyge.com/access_controls/users/social_login?provider=Facebook">
@@ -149,15 +149,15 @@ function Signin() {
 									</Link>
 								</Grid>
 							</Grid>
-						</Stack>
+						</Stack> */}
 
-						{/* <Link href="https://builder.fiyge.com/access_controls/users/social_login?provider=Google">
+						<Link href="https://builder.fiyge.com/access_controls/users/social_login?provider=Google">
 							<GoogleLoginButton>
 								<div style={{ textAlign: "center" }}>
 									<span style={{ fontSize: 13 }}>Log in with Google</span>
 								</div>
 							</GoogleLoginButton>
-						</Link> */}
+						</Link>
 					</Box>
 				</Box>
 			</Container>

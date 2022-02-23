@@ -19,7 +19,7 @@ import {
 	CurrencyElement,
 	NumberElement,
 	CancelElement,
-	HeaderElement
+	HeaderElement,
 } from "./elements";
 
 function AddFields() {
@@ -64,9 +64,9 @@ function AddFields() {
 			<div className="col-xl-6">
 				<RadioElement type="field" />
 			</div>
-			<div className="col-xl-6">
+			{/* <div className="col-xl-6">
 				<DropdownElement type="field" />
-			</div>
+			</div> */}
 			<div className="col-xl-6">
 				<RatingElement type="field" />
 			</div>

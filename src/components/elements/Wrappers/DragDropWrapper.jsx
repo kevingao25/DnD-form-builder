@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect } from "react";
 import React from "react";
 import { useDrag, useDrop } from "react-dnd";
 
 function DragDropWrapper(props) {
-	const { sortableRef, index, moveField, id, fieldName, setFocused, insertField } = props;
+	const { sortableRef, index, moveField, id, fieldName, setFocused } = props;
 
 	const [{ handlerID }, drop] = useDrop({
 		accept: ["sortable", "field"],
