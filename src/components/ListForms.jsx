@@ -50,7 +50,7 @@ function ListForms() {
 			});
 	}, []);
 
-	// Testing purpose
+	// Testing
 	console.log(formList);
 
 	const renderFormNames = (id, formName) => {
@@ -75,11 +75,11 @@ function ListForms() {
 	const [inputText, setInputText] = useState("");
 
 	let inputHandler = (e) => {
-		//convert input text to lower case
 		var lowerCase = e.target.value.toLowerCase();
 		setInputText(lowerCase);
 	};
 
+	// Render the list only after fetching the forms successfully
 	if (error) {
 		return <div>An error has occur...</div>;
 	} else if (!formList) {
@@ -91,18 +91,15 @@ function ListForms() {
 		);
 	} else {
 		let height = window.innerHeight - 210;
+
+		// Search bar filtering
 		const filteredData = formList.filter((el) => {
-			//if no input the return the original
 			if (inputText === "") {
 				return el;
-			}
-			//return the item which contains the user input
-			else {
+			} else {
 				return el["forms.full_name"].toLowerCase().includes(inputText);
 			}
 		});
-
-		console.log({ filteredData });
 		return (
 			<div style={{ height }}>
 				<TextField
