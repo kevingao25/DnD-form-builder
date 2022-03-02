@@ -1,10 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDrop } from "react-dnd";
 import uniqid from "uniqid";
 import update from "immutability-helper";
 import Button from "@mui/material/Button";
 import Modal from "react-modal";
 import Card from "@mui/material/Card";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 // Import field components
 import {
@@ -28,6 +32,7 @@ import {
 	CancelElement,
 	HeaderElement,
 } from "./elements";
+import axios from "axios";
 
 function BuildZone() {
 	// name <-> components
@@ -52,6 +57,20 @@ function BuildZone() {
 		CancelElement: CancelElement,
 		HeaderElement: HeaderElement,
 	};
+
+	const [models, setModels] = useState(undefined);
+	const [selectedModel, setSelected] = useState('');
+
+	useEffect(()=>{
+		axios.get("https://builder.fiyge.com/development_base/models/index.json", {
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem("access")
+			}
+		}).then(res => {
+			console.log(res.data);
+			setModels(res.data.paginate.data.map(x => x["models.name"]));
+		});
+	}, []);
 
 	// Track the list of fields in the build zone for rendering
 	const [fields, setFields] = useState({
@@ -219,8 +238,23 @@ function BuildZone() {
 									type="button"
 									class="btn-close"
 									aria-label="Close"
-									onClick={closeModal}></button>
+									onClick={closeModal}
+								/>
 							</div>
+							<FormControl fullWidth sx={{mt:2}}>
+								<InputLabel>Model</InputLabel>
+								<Select
+									value={selectedModel}	
+									label="Model"
+									onChange={(e)=>setSelected(e.target.value)}
+									MenuProps={{ PaperProps: { sx: { maxHeight: 400 } } }}
+									fullWidth
+								>
+									{models.map((item, i) => 
+										<MenuItem value={item} key={i}>{item}</MenuItem>
+									)}
+								</Select>
+							</FormControl>
 							<Card variant="outlined" sx={{ mt: 3, pl: 4, pt: 2 }}>
 								<pre>{JSON.stringify(fields, null, 2)}</pre>
 							</Card>
