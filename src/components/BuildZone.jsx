@@ -247,6 +247,7 @@ function BuildZone() {
 									value={selectedModel}	
 									label="Model"
 									onChange={(e)=>setSelected(e.target.value)}
+									MenuProps={{ PaperProps: { sx: { maxHeight: 400 } } }}
 									fullWidth
 								>
 									{models.map((item, i) => 
