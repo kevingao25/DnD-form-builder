@@ -226,6 +226,29 @@ function BuildZone() {
 							}}>
 							Export
 						</Button>
+
+						<Button
+								variant="outlined" color="success"
+								style={{
+									position: "absolute",
+									top: "20px",
+									right: "330px",
+									padding: "0.5%",
+								}}>
+								Create New Fiyge Form
+						</Button>
+
+						<Button 
+						variant="outlined" color="secondary"
+								style={{
+									position: "absolute",
+									top: "20px",
+									right: "180px",
+									padding: "0.5%"
+								}}>
+								Edit Fiyge Form
+						</Button>
+
 						<Modal
 							isOpen={modalIsOpen}
 							onAfterOpen={afterOpenModal}
@@ -266,7 +289,7 @@ function BuildZone() {
 				)
 			}
 		</div>
-	);
+	); 
 }
 
 export default BuildZone;

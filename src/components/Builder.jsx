@@ -91,10 +91,38 @@ function Builder() {
 							</div>
 						</div>
 
+
+						
 						<div className="col-8 fill-height scroll shadow-sm">
 							<BuildZone />
+							
+							{/*
+							<button type="button" className="btn btn-outline-primary"
+								variant="outlined"
+								style={{
+									position: "absolute",
+									bottom: "-40px",
+									right: "510px",
+									marginBottom: "30px"
+								}}>
+								Create New Fiyge Form
+							</button>
+
+							<button type="button" className="btn btn-outline-success"
+								variant="outlined"
+								style={{
+									position: "absolute",
+									bottom: "-40px",
+									right: "300px",
+									marginBottom: "30px"
+								}}>
+								Edit Fiyge Form
+							</button> 
+
+							*/}
+
 						</div>
-					</div>
+					</div> 
 				</div>
 			</DndProvider>
 		</div>
